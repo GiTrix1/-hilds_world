@@ -56,6 +56,7 @@ def collect_data(geo_city='RU-MOW'):  # RU-SPE | Питер
         if not cards:
             page = 0
             logger.info("Актуальных конструкторов LEGO больше нет.")
+            print("Актуальных конструкторов LEGO больше нет.")
             continue
         for card in cards:
             card_id_goods_and_title = card.find('p', class_='Rp').text.split()
@@ -67,7 +68,7 @@ def collect_data(geo_city='RU-MOW'):  # RU-SPE | Питер
                     writer = csv.writer(file_result)
                     writer.writerow(
                         (
-                            card_id_goods_and_title[-1].strip('()'),
+                            card_id_goods_and_title[-1].strip('()').strip('Сюрприз)'),
                             ' '.join(card_id_goods_and_title[:-1]),
                             card_old_price,
                             card_price,
@@ -79,7 +80,7 @@ def collect_data(geo_city='RU-MOW'):  # RU-SPE | Питер
                     writer = csv.writer(file_result)
                     writer.writerow(
                         (
-                            card_id_goods_and_title[-1].strip('()'),
+                            card_id_goods_and_title[-1].strip('()').strip('Сюрприз)'),
                             ' '.join(card_id_goods_and_title[:-1]),
                             card_price,
                             'Скидки нет',
